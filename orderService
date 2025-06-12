@@ -1,0 +1,28 @@
+POST /order
+function createOrder(req, res){
+    input => user_id, product_ids[], quantities[], prices[],
+    order>create with status as inProgress
+    order_item=> create with each product_ids, quantity and price.POST
+    Calculate total_price => update it in order
+}
+
+GET /order
+function getOrder(req, res){
+    input=> user_id
+    get all the orders for that user_id
+    return orders
+}
+
+GET order/:id
+function getOrderById(req, res){
+    input => order_id
+    output => order and all order_items for that order_id
+}
+
+PUT order/:id/cancel
+function cancelOrder(req, res){
+    input => order_id
+    change the status of order as cancel
+    delete all the order items related to that order
+    return 
+}

@@ -1,0 +1,23 @@
+POST delivery/assign
+function assignDelivery(req, res){
+    input: order_id, agent_id, eta
+    fetch order by order_id=> if order does not exist=> return error
+    else => create delivery instance with order_id, agent_id, status as dispatched and eta
+    return 
+    
+}
+
+GET delivery/status/:order_id
+function getStatus(req, res){
+    input: order_id
+    get delivery instance from order_id. get status from there
+    output: status
+}
+
+PUT delivery/update
+function updateDelivery(req, res){
+    input: id, agent_id, status, eta
+    fetch delivery using id
+    check for the fields that are not null and update the values from there
+    
+}

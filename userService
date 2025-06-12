@@ -1,0 +1,39 @@
+import { Profiler } from "react"
+
+POST /Register
+
+function register(req, res){
+    input: name, password, email, phone
+    if(password matches criteria){
+        send OTP(though third party)
+    }
+    verify OTP(through third paty)
+    If OTP verification successfull=> create account
+}
+
+POST /login
+function login(req, res){
+    input: email, password
+    if(password correct){
+        login successfull
+    }
+}
+
+GET /Pofile
+function profile(req, res){
+    input: email
+    output: user details
+}
+
+PUT /Profile
+function editProfile(req, res){
+    input:phone, name, email
+    output: profile edited with values which is not null
+}
+
+POST /verifyOTP
+function verifyOTP(req, res){
+    input: OTP, phone
+    third party call to verify OTP
+    if(OTP veification successfull) => return 
+}

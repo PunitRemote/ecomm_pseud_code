@@ -1,0 +1,14 @@
+GET /inventory/:productid
+function getInventory(req, res){
+    input=> productid
+    fetches inventory details like location and stock from the db and returns.
+    Output =>{location, stock}
+}
+
+POST /inventory/update
+function updateInventory(req, res){
+    input => product_id, location, stock
+    fetches inventory from the product_id.
+    Updates location and stock if they are not null
+    return 
+}

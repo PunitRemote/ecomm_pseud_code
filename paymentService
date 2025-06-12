@@ -1,0 +1,35 @@
+POST payment/initiate
+
+function initiatePayment(req, res){
+	input:
+	 -user_id 
+    - payment_method 
+    - address_id 
+    - cart_id 
+	fetch user_info from user_id
+	fetch cart from cart_id => calculate total.
+	create payment instance with order_id in it.
+	Initiate payment using payment_method, user_info and total.
+	return
+}
+
+POST payment/verify
+
+function verifyPayment(req, res){
+	input:
+	user_id
+	order_id
+	fetch payment using order_id
+	call the third party api using transaction_id in payment instance
+	check if the payment is successfull and update the status in payment instance
+	return
+}
+
+GET payment/status/:order_id
+function getPaymentStatus(req, res){
+	input:
+	order_id
+
+	from the order_id, get the status from payment_instance and return.
+}
+

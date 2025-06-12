@@ -1,0 +1,20 @@
+GET /products
+func products(req, res){
+	input => none
+	output => return all the products available in the db
+}
+
+GET /products/:id
+func productByID(req, res){
+	input => id
+	if:
+	id is present in the database=> return the product with that particular id
+	else:
+	return error
+}
+
+GET /categories
+func categories(req, res){
+	input => none
+	output => return all the available categories in the database
+}
