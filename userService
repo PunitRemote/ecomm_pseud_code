@@ -3,14 +3,7 @@ POST /Register
 
 function register(req, res){
     input: name, password, email, phone
-    if(userExists(email,phone){
-        return "user already exists"
-    })
-    if(password matches
-POST /Register
 
-function register(req, res){
-    input: name, password, email, phone
     if(userExists(email,phone){
         return "user already exists"
     })
@@ -35,7 +28,7 @@ function login(req, res){
 
 
 
-GET /Pofile
+GET /Profile
 function profile(req, res){
     input: email
     output: user details
@@ -75,85 +68,3 @@ function forgotPassword(req, res){
     return "OTP sent to registered phone"
 }
 
-
-function resetPassword(req, res){
-    input => {phone, newPassword, otp}
-    sendOTP(phone)
-    verifyOTP(OTP, phone)
-    if(!verifyOTP){
-        return "OTP verification failed"
-    } 
-    updatePassword(phone, newPassword)
-    return "Password reset successfully"
-} criteria){
-        send OTP(though third party)
-    }
-
-    verify OTP(through third paty)
-    If OTP verification successfull=> create account
-}
-
-
-POST /login
-function login(req, res){
-    input: email, password
-    if(password correct){
-        login successfull
-    }
-    call GET /Profile
-    profile page with user details
-}
-
-
-
-GET /Pofile
-function profile(req, res){
-    input: email
-    output: user details
-}
-
-PUT /Profile
-function editProfile(req, res){
-    input:phone, name, email
-    if(!userExists(phone)){
-        return "User does not exist"
-    }
-    if(!userExists(email)){
-        return "User does not exist"
-    }
-    output: profile edited with values which is not null
-}
-
-POST /verifyOTP
-function verifyOTP(req, res){
-    input: OTP, phone
-    third party call to verify OTP
-    if(!isValid){
-        return "OTP verification failed"
-    }
-    if(OTP veification successfull) => markPhoneVerified(Phone)
-    return "Phone verified" 
-}
-
-POST /resetPassword
-function forgotPassword(req, res){
-    input => email
-    if(!userExists(email)){
-        return "user does not exist"
-    }
-    =>get phone by email from db
-    sendOTP(phone)
-    return "OTP sent to registered phone"
-}
-
-
-function resetPassword(req, res){
-    input => {phone, newPassword, otp}
-    sendOTP(phone)
-    verifyOTP(OTP, phone)
-    if(!verifyOTP){
-        return "OTP verification failed"
-    } 
-    updatePassword(phone, newPassword)
-    return "Password reset successfully"
-}
