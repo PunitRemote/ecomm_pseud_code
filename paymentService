@@ -3,13 +3,17 @@ POST payment/initiate
 function initiatePayment(req, res){
 	input:
 	 -user_id 
-    - payment_method 
-    - address_id 
-    - cart_id 
+    - payment_method  
+    - order_id 
+
+	if(!order || !order.status === "pending_payment"){
+		return error
+	}
 	fetch user_info from user_id
-	fetch cart from cart_id => calculate total.
-	create payment instance with order_id in it.
+	fetch cart from order_id => total = cart.total.
+	create payment instance with order_id.
 	Initiate payment using payment_method, user_info and total.
+	create payment instance with transaction_id fetched from thrid party api.
 	return
 }
 
@@ -21,11 +25,18 @@ function verifyPayment(req, res){
 	order_id
 	fetch payment using order_id
 	call the third party api using transaction_id in payment instance
-	check if the payment is successfull and update the status in payment instance
-	return
+	check if the payment is successfull and update the status in payment instance and order instance
+	if paymentFailed{
+		update status in payment instance as failed
+		update paymentStatus in order as failed
+		restoreInventory(order_id)
+		return "payment failed"
+	}
+	call GET /profile
+	return profile
 }
 
-GET payment/status/:order_id
+GET payment/status
 function getPaymentStatus(req, res){
 	input:
 	order_id

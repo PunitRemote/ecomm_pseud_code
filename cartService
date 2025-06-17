@@ -5,43 +5,57 @@ function getCart(req, res){
 	if cart is not present:
 	return cart is not present
     if cart is present:
-	return cart
+	const total = calculateCartTotal(cart.items)
+	return (cart, total)
 }
+
 
 POST /cart
 function createCart(req, res){
-	input: user_id, items => item_ids[], quantities []
-	create a new cart for that paticular user with specific item_ids and quantity 
-	return
-	if(item is not present){
-		return error
+	input => user_id, item_id, quantity
+	if(!itemAvailable){
+		return "Item is not available"
 	}
+	const cart = findOrCreateCart(user_id)
+	addItem(cart, item_id, quantity)
+	return ("Item added", cart.id)
 
 
 }
 
-PUT /cart/:item_id
-function editCart(req, res){
-	input => cart_id, item_id, quantity
+PUT /removeItemFromCart
+function removeItemFromCart(req, res){
+	input => cart_id, item_id
+	if(cart is not present){
+		return error
+	}
+	if(item is not present or is not in the cart){
+		return error
+	}
+	else{
+		remove specific item from the cart
+	}
+}
+
+Delete /cart
+function deleteItem(req, res){
+	input => cart_id
 	if(cart_id is not present){
 		return error
 	}
-	else if(item is not present){
-		return error
-	}
 	else{
-		add specific item to the cart with the specific quantity
+		delete the entire cart
 	}
 }
 
-Delete cart/:item_id
-function deleteItem(req, res){
-	input => cart_id, item_id
-	if(cart_id or item_id is not present){
+POST /checkoutCart
+function checkoutCart(req, res){
+	input => user_id
+	const cart = getCart(user_id)
+	if(!cart){
 		return error
 	}
-	else{
-		delete that item from the cart
-	}
+	const total = calculateCartTotal(cart.items)
+	const order = createOrder(userId, cart.items, total)
+	return ("order created", order.id)
 }
-

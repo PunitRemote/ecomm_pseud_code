@@ -1,17 +1,25 @@
-POST /order
+POST /orders
 function createOrder(req, res){
-    input => user_id, product_ids[], quantities[], prices[],
-    order>create with status as inProgress
-    order_item=> create with each product_ids, quantity and price.POST
-    Calculate total_price => update it in order
+    input => cart_id, user_id
+    const cart = cartService.getCart(cart_id)
+    if(!cart){
+        return error
+    }
+    =>create order with user_id, cart_id, cart.total, status as "pending payment".
+    =>add items to the order from the cart
+    =>clear the cart or delete it
+    updateInventory(cart.items)
+    return {order.id, payment_redirect_url}
 }
 
-GET /order
+GET /orders
 function getOrder(req, res){
     input=> user_id
     get all the orders for that user_id
     return orders
 }
+
+
 
 GET order/:id
 function getOrderById(req, res){
@@ -21,8 +29,15 @@ function getOrderById(req, res){
 
 PUT order/:id/cancel
 function cancelOrder(req, res){
-    input => order_id
+    input => order_id, user_id
     change the status of order as cancel
     delete all the order items related to that order
-    return 
+    const cart = getCart(user_id)
+    if(!cart){
+        return error
+    }
+    initiateRefund through third party service => cart.total
+    updateInventory(cart.items)
+    Updatedelivery(order_id) 
+
 }

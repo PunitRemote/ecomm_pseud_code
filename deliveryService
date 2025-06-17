@@ -1,18 +1,29 @@
 POST delivery/assign
 function assignDelivery(req, res){
-    input: order_id, agent_id, eta
-    fetch order by order_id=> if order does not exist=> return error
-    else => create delivery instance with order_id, agent_id, status as dispatched and eta
-    return 
-    
+    input: order_id
+    get order by order_id
+    if(!order || !order.status === "paid"){
+        return error
+    }
+    get nearest agent by order.delivery_address
+    if(!agent){
+        return error
+    }
+    calculate ETA based on agent location and order.delivery_address
+    create delivery instance using agent_id, eta and order_id.
+    mark the agent as busy
+    return delivery_id
 }
 
-GET delivery/status/:order_id
+
+GET delivery/status
 function getStatus(req, res){
-    input: order_id
-    get delivery instance from order_id. get status from there
+    input: delivery_id
+    get delivery instance from delivery_id. get status from there
     output: status
 }
+
+
 
 PUT delivery/update
 function updateDelivery(req, res){
@@ -21,3 +32,14 @@ function updateDelivery(req, res){
     check for the fields that are not null and update the values from there
     
 }
+
+GET /delivery
+function getDelivery(req, res){
+    input => deliveryId
+    const delivery = getDeliveryByDeliveryId(deliveryId)
+    if(!delivery){
+        return error
+    }
+    return delivery
+}
+
